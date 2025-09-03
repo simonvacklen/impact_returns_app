@@ -116,7 +116,8 @@ shinyApp(ui, server)
 
 
 #install.packages("shinylive")
-install.packages("lattice")
+#install.packages("lattice")
 
 #shinylive::export("Web_Interface", "Web_Interface/WebInterface_site")
+
 
