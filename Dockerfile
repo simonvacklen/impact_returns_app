@@ -1,6 +1,6 @@
 FROM rocker/shiny:latest
 
-# Install system libraries needed by some R packages such as flextable
+# Install system libraries needed for R packages (e.g., flextable, officer, ragg)
 RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
@@ -9,21 +9,21 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libharfbuzz-dev \
     libfribidi-dev \
-    libpng-dev
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev
 
-# Install needed packages
+# Install core R packages with dependencies explicitly
+RUN R -e "install.packages(c('ragg', 'officer'), repos='https://cran.rstudio.com/')"
+RUN R -e "install.packages(c('flextable'), repos='https://cran.rstudio.com/')"
+RUN R -e \"install.packages(c('zip', 'readxl', 'dplyr', 'ggplot2', 'tidyr', 'rlang', 'ggrepel', 'quantmod', 'reshape2'), repos='https://cran.rstudio.com/')\"
 
-RUN R -e "install.packages(c('zip','readxl', 'dplyr', 'ggplot2', 'tidyr','rlang','ggrepel','flextable','officer','quantmod', 'reshape2'), repos='https://cran.rstudio.com/')"
-
-# Copy app files
+# Copy app files to the Shiny server directory
 COPY . /srv/shiny-server/
 
-# Expose port
+# Expose Shiny app port
 EXPOSE 8080
 
-# Run the app
-CMD ["R", "-e", "shiny::runApp('/srv/shiny-server/app.R', host='0.0.0.0', port=8080)"]
-
-
-
+# Run the Shiny app
+CMD [\"R\", \"-e\", \"shiny::runApp('/srv/shiny-server/app.R', host='0.0.0.0', port=8080)\"]
 
