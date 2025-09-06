@@ -81,10 +81,10 @@ server <- function(input, output) {
       print("temp_dir:")
       print(tempdir())
       
-      load("r_Other_Code/reportmakerEU.RData")
-      reportmakerEU(source_path = "AutoReport/Template_Standard_EUGBS_V3.docx",
-                    output_path = output_name, 
-                    output_list=output_list)
+      load("r_Other_Code/reportmaker.RData")
+      reportmaker(source_path = "AutoReport/Template_Standard_V2.docx",
+                  output_path = output_name
+      )
       incProgress(0.2, detail = "Generated DOCX completed.")
       
       # Generate download link for DOCX with description
@@ -113,11 +113,5 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
-
-
-#install.packages("shinylive")
-#install.packages("lattice")
-
-#shinylive::export("Web_Interface", "Web_Interface/WebInterface_site")
 
 
