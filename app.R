@@ -32,13 +32,16 @@ server <- function(input, output) {
       save_path <- file.path(save_directory, file_name)
       file.copy(input$file$datapath, save_path)
       incProgress(0.2, detail = "File saved.")
+      
       load("r_Other_Code/scriptrunner.RData")
-      output_list <- scriptrunner(excel_file = save_path, rounding = "M")
+      output_list <- scriptrunner(excel_file = save_path, rounding = "Million")
+      
       incProgress(0.2, detail = "Script runner completed.")
+      
       name <- as.data.frame(output_list[[1]][1])[1, 2]
       output_name <- file.path(tempdir(), paste0("Impact_Report_", name, ".docx"))
       load("r_Other_Code/reportmaker.RData")
-      reportmaker(source_path = "AutoReport/Template_Standard_V2.docx",
+      reportmaker(source_path = "AutoReport/Template_Standard_V3.docx",
                   output_path = output_name,
                   output_list = output_list
       )
