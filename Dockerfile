@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     libtiff5-dev \
     libjpeg-dev
 
+RUN apt-get update && apt-get install -y libmagick++-dev
 # Install core R packages with dependencies explicitly
 RUN R -e "install.packages(c('ragg', 'officer'), repos='https://cran.rstudio.com/')"
 RUN R -e "install.packages(c('flextable'), repos='https://cran.rstudio.com/')"
@@ -26,6 +27,7 @@ EXPOSE 8080
 
 # Run the Shiny app
 CMD ["R", "-e", "shiny::runApp('/srv/shiny-server/app.R', host='0.0.0.0', port=8080)"]
+
 
 
 
