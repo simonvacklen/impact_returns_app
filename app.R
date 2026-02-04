@@ -34,7 +34,7 @@ server <- function(input, output) {
       incProgress(0.2, detail = "File saved.")
       
       load("r_Other_Code/scriptrunner.RData")
-      output_list <- scriptrunner(excel_file = save_path, rounding = "Million")
+      output_list <- scriptrunner(excel_file = save_path, rounding = "M")
       
       incProgress(0.2, detail = "Script runner completed.")
       
@@ -68,3 +68,4 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
