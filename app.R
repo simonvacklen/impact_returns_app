@@ -43,7 +43,7 @@ server <- function(input, output) {
       load("r_Other_Code/reportmaker.RData")
       reportmaker(source_path = "AutoReport/Template_Standard_V4.docx",
                   output_path = output_name,
-                  output_list = output_list
+                  output_list = output_list, LY="N", level="project"
       )
       incProgress(0.2, detail = "Generated DOCX completed.")
       
@@ -68,5 +68,6 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
 
 
