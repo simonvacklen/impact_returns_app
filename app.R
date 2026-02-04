@@ -41,7 +41,7 @@ server <- function(input, output) {
       name <- as.data.frame(output_list[[1]][1])[1, 2]
       output_name <- file.path(tempdir(), paste0("Impact_Report_", name, ".docx"))
       load("r_Other_Code/reportmaker.RData")
-      reportmaker(source_path = "AutoReport/Template_Standard_V3.docx",
+      reportmaker(source_path = "AutoReport/Template_Standard_V4.docx",
                   output_path = output_name,
                   output_list = output_list
       )
@@ -68,4 +68,5 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
 
